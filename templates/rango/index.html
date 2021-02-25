@@ -11,8 +11,20 @@
     <body>
         <h1>Rango Says</h1>
         <div>
-            hey there Mayank!<br/>
+            hey there Mayank you are missing !<br/>
             <strong>{{ boldmessage}} </strong>
+        </div>
+
+        <div>
+        {% if categories %}
+        <ul>
+        {% for category in categories %}
+        <li>{{ category.name }}</li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        <strong>There are no categories present.</strong>
+        {% endif %}
         </div>
 
         <div>
