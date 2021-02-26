@@ -16,10 +16,13 @@
         </div>
 
         <div>
+            <h1>Most liked categories</h1>
         {% if categories %}
         <ul>
         {% for category in categories %}
-        <li>{{ category.name }}</li>
+        <li>
+            <a href="/rango/category/{{ category.slug }}">{{ category.name }}</a>
+        </li>
         {% endfor %}
         </ul>
         {% else %}
@@ -28,9 +31,23 @@
         </div>
 
         <div>
+            <h2>Most Viwed pages</h2>
+            {% if most_viwed_pages %}
+            <ul>
+                {% for mvp in most_viwed_pages%}
+                <li>
+                <a href="{{ mvp.url }}">{{mvp.title}}</a>
+                </li>
+                {%endfor%}
+            </ul>
+            {%else%}
+            <strong>No most viwed pages found</strong>
+            {% endif %}
+        </div>
+        <div>
             <a href="/rango/about">About</a><br/>
             <img src="{% static 'images/bru.jpg'%}"
-            alt="Picture of Rango" />
+            alt="Picture of Rango" width="500" height="500" />
         </div>
     </body>
 </html>
