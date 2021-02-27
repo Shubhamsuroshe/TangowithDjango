@@ -30,7 +30,7 @@ def show_category(request, category_name_slug):
     return render(request,'rango/category.html', context_dict)
 
 def about(request):
-    return HttpResponse("Rango says hey there its about page")
+    return render(request,'rango/about.html')
 
 def add_category(request):
     form = CategoryForm()

@@ -1,27 +1,14 @@
-<!DOCTYPE html>
+{% extends 'rango/base.html' %}
 {% load staticfiles %}
 
-<html>
-    <head>
-        <title>
-            Rango
-        </title>
-    </head>
-
-    <body>
-        <h1>Rango Says</h1>
-        <div>
-            hey there Mayank you are missing !<br/>
-            <strong>{{ boldmessage}} </strong>
-        </div>
-
+{% block body_block %}
         <div>
             <h1>Most liked categories</h1>
         {% if categories %}
         <ul>
         {% for category in categories %}
         <li>
-            <a href="/rango/category/{{ category.slug }}">{{ category.name }}</a>
+            <a href="{% url 'show_category' category.slug %}">{{ category.name }}</a>
         </li>
         {% endfor %}
         </ul>
@@ -44,13 +31,8 @@
             <strong>No most viwed pages found</strong>
             {% endif %}
         </div>
-
-        <a href="/rango/add_category/"> Add a New Category</a><br/>
-        <a href="/rango/category/{{ category.slug }}/add_page/">Add Page</a> <br/>
         <div>
-            <a href="/rango/about">About</a><br/>
             <img src="{% static 'images/bru.jpg'%}"
-            alt="Picture of Rango" width="500" height="500" />
+            alt="Picture of Rango" width="200" height="200" />
         </div>
-    </body>
-</html>
+{% endblock %}
