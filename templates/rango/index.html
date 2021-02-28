@@ -2,6 +2,12 @@
 {% load staticfiles %}
 
 {% block body_block %}
+
+{% if user.is_authenticated %} 
+howdy {{ user.username }}!
+ {% else %} 
+ hey there partner! 
+ {% endif %}
         <div>
             <h1>Most liked categories</h1>
         {% if categories %}
