@@ -2,6 +2,10 @@
 {% load staticfiles %}
 
 {% block body_block %}
-<h1>This is about page</h1>
-<h4>Soon will be updated</h4>
+<div class="jumbotron p-4">
+    <div class="container">
+        <h1 class="jumbotron-heading">This is about page {{category.name}}</h1>
+    </div>
+</div>
+
 {% endblock %}

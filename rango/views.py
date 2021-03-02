@@ -1,8 +1,10 @@
+from registration.backends.simple.views import RegistrationView
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse 
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 from django.http import HttpResponse
 from rango.models import Category
@@ -11,6 +13,7 @@ from rango.forms import CategoryForm
 from rango.forms import PageForm
 from rango.forms import UserForm
 from rango.forms import UserProfileForm
+from rango.bing_search import run_query
 
 def index(request):
     context_dict = {}
@@ -127,3 +130,17 @@ def restricted(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('index'))
+
+# class MyRegistrationView(RegistrationView):
+#     def get_success_url(self, user):
+#         return reverse('index')
+
+def search(request):
+    result_list = []
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        if query:
+            # Run our Bing function to get the results list!
+            result_list = run_query(query)
+    
+    return render(request, 'rango/search.html', {'result_list': result_list})

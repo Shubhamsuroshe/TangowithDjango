@@ -19,10 +19,15 @@ from django.urls import include
 from django.conf.urls.static import static
 from django.conf import settings
 from rango import views
+from django.conf.urls import url
+# from rango.views import MyRegistrationView
 
 urlpatterns = [
     #path("",views.index, name="index"),
 
     path('rango/', include('rango.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/',include('registration.backends.simple.urls')),
+    # url(r'^search/', include('googlesearch.urls')),
+    # path('accounts/register/',MyRegistrationView.as_view(),name='registration_register'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

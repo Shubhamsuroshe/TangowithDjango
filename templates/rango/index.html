@@ -2,43 +2,61 @@
 {% load staticfiles %}
 
 {% block body_block %}
-
-{% if user.is_authenticated %} 
-howdy {{ user.username }}!
- {% else %} 
- hey there partner! 
- {% endif %}
-        <div>
-            <h1>Most liked categories</h1>
-        {% if categories %}
-        <ul>
-        {% for category in categories %}
-        <li>
-            <a href="{% url 'show_category' category.slug %}">{{ category.name }}</a>
-        </li>
-        {% endfor %}
-        </ul>
+<div class='jumbotron p-4'>
+    <div class='container'>
+        <h1 class='jumbotron-heading'>Rango says</h1>
+        {% if user.is_authenticated %}
+        <h2>howdy {{ user.username }}! </h2>
         {% else %}
-        <strong>There are no categories present.</strong>
+        hey there partner!
         {% endif %}
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-6">
+                <div class="card-body">
+                    <h2>Most Liked Categories</h2>
+                    <p class="card-text">
+                        {% if categories %}
+                    <ul class="list-group">
+                        {% for category in categories %}
+                        <li class="list-group-item">
+                            <a href="{% url 'show_category' category.slug %}">{{ category.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <strong>There are no categories present.</strong>
+                    {% endif %}
+                    </p>
+                </div>
+            </div>
         </div>
-
-        <div>
-            <h2>Most Viwed pages</h2>
-            {% if most_viwed_pages %}
-            <ul>
-                {% for mvp in most_viwed_pages%}
-                <li>
-                <a href="{{ mvp.url }}">{{mvp.title}}</a>
-                </li>
-                {%endfor%}
-            </ul>
-            {%else%}
-            <strong>No most viwed pages found</strong>
-            {% endif %}
+        <div class="col-md-6">
+            <div class="card mb-6">
+                <div class="card-body">
+                    <h2>Most Viewed Pages</h2>
+                    <p class="card-text"></p>
+                    {% if most_viwed_pages %}
+                    <ul class="list-group">
+                        {% for mvp in most_viwed_pages%}
+                        <li class="list-group-item">.
+                            <a href="{{ mvp.url }}">{{mvp.title}}</a>
+                        </li>
+                        {%endfor%}
+                    </ul>
+                    {%else%}
+                    <strong>No most viwed pages found</strong>
+                    {% endif %}
+                    </p>
+                </div>
+            </div>
         </div>
-        <div>
-            <img src="{% static 'images/bru.jpg'%}"
-            alt="Picture of Rango" width="200" height="200" />
-        </div>
+    </div>
+</div>
+<!-- <div>
+    <img src="{% static 'images/bru.jpg'%}" alt="Picture of Rango" width="200" height="200" />
+</div> -->
 {% endblock %}
