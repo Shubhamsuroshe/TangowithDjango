@@ -1,0 +1,9 @@
+<ul>
+    {% if cats %}
+    {% for c in cats %}
+        <li><a href="{% url 'show_category' c.slug %}">{{ c.name }}</a></li>
+    {% endfor %}
+    {% else %}
+    <li><strong> There are no categories present</strong></li>
+    {% endif %}
+</ul>

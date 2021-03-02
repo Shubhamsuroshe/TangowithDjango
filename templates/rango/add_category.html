@@ -1,0 +1,27 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+<div class="jumbotron p-4">
+    <div class="container">
+        <h1 class="jumbotron-heading">Add a Category </h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <form role="form" id="category_form" method="post" action="/rango/add_category/">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}
+            {{ field }}
+            {% endfor %}
+            <button class="btn btn-primary" type="submit" name="submit">
+                Create Category
+        </form>
+    </div>
+</div>
+{% endblock %}
