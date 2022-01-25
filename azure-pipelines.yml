@@ -47,14 +47,21 @@ steps:
   displayName: 'Install prerequisites'
 
 
-- task: ArchiveFiles@1
+# - task: ArchiveFiles@1
+#   inputs:
+#     rootFolderOrFile: '$(Build.SourcesDirectory)'
+#     includeRootFolder: false
+#     archiveType: 'zip'
+#     archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
+#     replaceExistingArchive: true
+#     verbose: -vvv
+- task: PowerShell@2
+  displayName: 'Inline Powershell'
   inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
-    replaceExistingArchive: true
-    verbose: # (no value); this input is optional
+    TargetType: inline
+    Script: |
+     Compress-Archive -Path "$(Build.BinariesDirectory)\target\debug" -DestinationPath "$(Build.ArtifactStagingDirectory)\MyProject-$(build)-$(Build.BuildId).zip"
+    pwsh: true
 
 - task: PublishBuildArtifacts@1
   inputs:
