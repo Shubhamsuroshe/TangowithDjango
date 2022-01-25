@@ -45,7 +45,7 @@ steps:
   displayName: 'Install prerequisites'
 
 
-- task: ArchiveFiles@1
+- task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(Build.SourcesDirectory)'
     includeRootFolder: false
