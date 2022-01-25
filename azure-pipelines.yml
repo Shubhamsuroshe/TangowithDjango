@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 strategy:
   matrix:
     Python35:
@@ -47,21 +47,14 @@ steps:
   displayName: 'Install prerequisites'
 
 
-# - task: ArchiveFiles@1
-#   inputs:
-#     rootFolderOrFile: '$(Build.SourcesDirectory)'
-#     includeRootFolder: false
-#     archiveType: 'zip'
-#     archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
-#     replaceExistingArchive: true
-#     verbose: -vvv
-- task: PowerShell@2
-  displayName: 'Inline Powershell'
+- task: ArchiveFiles@1
   inputs:
-    TargetType: inline
-    Script: |
-     Compress-Archive -Path "$(Build.BinariesDirectory)\target\debug" -DestinationPath "$(Build.ArtifactStagingDirectory)\MyProject-$(build)-$(Build.BuildId).zip"
-    pwsh: true
+    rootFolderOrFile: '$(Build.SourcesDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
 
 - task: PublishBuildArtifacts@1
   inputs:
