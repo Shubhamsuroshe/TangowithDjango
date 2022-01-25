@@ -46,6 +46,21 @@ steps:
     pip install unittest-xml-reporting
   displayName: 'Install prerequisites'
 
+
+- task: ArchiveFiles@1
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
+    replaceExistingArchive: true
+    verbose: # (no value); this input is optional
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+
 # - script: |
 #     pushd '$(projectRoot)'
 #     python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
